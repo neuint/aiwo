@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@root/*": ["./src/*"],
+      "_common/*": ["./src/components/_common/*"],
+      "@flows/*": ["./src/components/_flows/*"],
+      "@common/*": ["../../common/src/*"],
+      "@presentations/*": ["./src/components/presentations/*"],
+      "@containers/*": ["./src/components/containers/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@api/*": ["./src/api/*"],
+      "@ducks/*": ["./src/ducks/*"],
+      "@World/*": ["./src/World/*"],
+      "@ElementController/*": ["./src/ElementController/*"],
+      "@context/*": ["./src/context/*"],
+      "@selectors/*": ["./src/selectors/*"],
+      "@state/*": ["./src/state/*"]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}

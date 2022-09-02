@@ -1,0 +1,14 @@
+@import 'src/styles/functions';
+@import 'src/styles/mixins';
+
+.ElementFlow__warn {
+  color: var(--aiwo-danger);
+}
+
+.ElementFlow__label {
+  opacity: 0.6;
+}
+
+.ElementFlow__center {
+  text-align: center;
+}

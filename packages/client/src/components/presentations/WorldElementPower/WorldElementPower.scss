@@ -1,0 +1,11 @@
+@import 'src/styles/functions';
+@import 'src/styles/mixins';
+
+.WorldElementPower {
+  position: absolute;
+  color: var(--term-js-text);
+  background: var(--aiwo-bg);
+  padding: unit(0.5);
+  right: unit(1);
+  top: unit(1);
+}

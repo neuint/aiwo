@@ -1,0 +1,54 @@
+@import 'src/styles/functions';
+@import 'src/styles/mixins';
+
+@keyframes World__logoPulse {
+  0% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.1;
+  }
+}
+
+.World {
+  display: flex;
+  position: relative;
+  background: var(--aiwo-bg);
+}
+
+.World__container {
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.World__logoContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  @include flex-c;
+}
+
+.World__logo {
+  width: 50%;
+  height: 50%;
+  max-width: unit(100);
+  max-height: unit(100);
+  opacity: 0.05;
+  animation-name: World__logoPulse;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+}

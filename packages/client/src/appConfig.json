@@ -1,0 +1,16 @@
+{
+  "defaultServer": "127.0.0.1",
+  "defaultServerPort": 8080,
+  "minConnectDuration": 1000,
+  "persistName": "persist:AIWO",
+  "fontPath": "/roboto.woff",
+  "localeInfoPath": "/locales/info.json",
+  "localePathPattern": "/locales/{{name}}/index.json",
+  "defaultTimeout": 3000,
+  "messageShowDuration": 7000,
+  "feature": {
+    "elementBorderBox": false,
+    "elementViewZonePoints": true,
+    "elementViewZone": true
+  }
+}

@@ -1,0 +1,32 @@
+@import 'src/styles/functions';
+@import 'src/styles/mixins';
+
+.ElementControlFlowModal__pair {
+  @include padding-v(1);
+  display: flex;
+  cursor: default;
+
+  &:hover {
+    background-color: var(--term-js-modals-close-active);
+  }
+}
+
+.ElementControlFlowModal__key {
+  font-weight: 600;
+  width: unit(28);
+}
+
+.ElementControlFlowModal__exit {
+  margin-top: unit(4);
+}
+
+.ModalView__container {
+  overflow: hidden;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ModalView__modal {
+  @include overflow-v(scroll);
+}

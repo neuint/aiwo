@@ -1,0 +1,188 @@
+@import './functions';
+@import './svar';
+
+@mixin media-less($value) {
+  @media only screen and (max-width: ($value * $unit - 1px)) {
+    @content;
+  }
+}
+
+@mixin media-bigger($value) {
+  @media only screen and (min-width: ($value * $unit)) {
+    @content;
+  }
+}
+
+@mixin truncated($lines: 1) {
+  overflow: hidden;
+
+  @if $lines == 1 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@mixin empty-button {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+@mixin size($value: 10) {
+  width: unit($value);
+  height: unit($value);
+}
+
+@mixin icon-size($value: 10, $svg-size: 0) {
+  @include size($value);
+
+  @if $svg-size > 0 {
+    padding: calc((#{unit($value)} - #{unit($svg-size)}) / 2);
+    svg {
+      @include size($svg-size);
+    }
+  } @else {
+    padding: calc((#{unit($value)} - var(--size-svg-icon)) / 2);
+  }
+}
+
+@mixin loader-size($value: 6) {
+  @include size($value);
+
+  > span {
+    @include size($value - 1);
+  }
+}
+
+@mixin flex-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-ch {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-rh {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@mixin flex-lh {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@mixin flex-cv {
+  display: flex;
+  align-items: center;
+}
+
+@mixin padding-h($x: 3) {
+  padding-left: unit($x);
+  padding-right: unit($x);
+}
+
+@mixin padding-v($x: 3) {
+  padding-top: unit($x);
+  padding-bottom: unit($x);
+}
+
+@mixin margin-h($x: 3) {
+  margin-left: unit($x);
+  margin-right: unit($x);
+}
+
+@mixin margin-v($x: 3) {
+  margin-left: unit($x);
+  margin-right: unit($x);
+}
+
+@mixin overflow-v($value: auto) {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: $value;
+  overflow-x: hidden;
+}
+
+@mixin overflow-h($value: auto) {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: $value;
+  overflow-y: hidden;
+}
+
+@mixin overflow($value: auto) {
+  -webkit-overflow-scrolling: touch;
+  overflow: $value;
+}
+
+@mixin empty-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  > li {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@mixin h1 {
+  font-size: unit(18);
+  line-height: 100%;
+  letter-spacing: 0.02em;
+  font-weight: var(--fw-bold);
+}
+
+@mixin h2 {
+  font-size: unit(10.5);
+  line-height: unit(9);
+  font-weight: var(--fw-bold);
+}
+
+@mixin h3 {
+  font-size: unit(6);
+  line-height: unit(6);
+  font-weight: var(--fw-medium);
+}
+
+@mixin txt {
+  font-size: unit(4);
+  line-height: unit(6);
+  font-weight: var(--fw-regular);
+}
+
+@mixin small-txt {
+  font-size: unit(3);
+  line-height: unit(4);
+  font-weight: var(--fw-regular);
+}
+
+// TODO: deprecated, use small-txt instead
+@mixin desc {
+  font-size: unit(3);
+  line-height: unit(4);
+  font-weight: var(--fw-regular);
+}
+
+@mixin menu-text {
+  font-size: unit(4.5);
+  line-height: unit(4.5);
+  letter-spacing: 0.05em;
+  font-weight: var(--fw-regular);
+}
+
+@mixin button-text {
+  font-size: unit(4);
+  line-height: unit(4);
+  letter-spacing: 0.05em;
+  font-weight: var(--fw-medium);
+}

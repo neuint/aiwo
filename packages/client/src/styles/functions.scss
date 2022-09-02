@@ -1,0 +1,7 @@
+@function unit($x: 1) {
+  @if (type-of($x) == 'string') {
+    @return calc(var(--unit) * var(#{$x}));
+  } @else {
+    @return calc(var(--unit) * #{$x});
+  }
+}

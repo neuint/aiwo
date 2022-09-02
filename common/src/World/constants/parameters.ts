@@ -1,0 +1,13 @@
+export const BITE_OFF_INDEX = 0.1;
+export const VIEW_ZONE_ANGLE_POINTS_STEP = 0.1;
+export const VIEW_ZONE_ANGLE = 36;
+export const VIEW_ZONE_ROTATE_MAX = 75;
+export const VIEW_ZONE_INCREASE = 7;
+export const ACTION_TIMEOUT = 500;
+export const DEFAULT_POWER = 10000;
+export const STEP_POWER = 0.1;
+export const ACTION_POWER = 1;
+export const LINE_STEP = 1;
+export const MAX_LINE_STEP = 6;
+export const MAX_ROTATION_STEP = 1;
+export const UPDATE_INTERVAL = 20;

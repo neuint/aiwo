@@ -1,0 +1,15 @@
+.ConfirmationStep__yes, .ConfirmationStep__no {
+  font-weight: 600;
+}
+
+.ConfirmationStep__no {
+  opacity: 0.5;
+}
+
+.ConfirmationStep__warning {
+  color: var(--aiwo-warning);
+}
+
+.ConfirmationStep__danger {
+  color: var(--aiwo-danger);
+}

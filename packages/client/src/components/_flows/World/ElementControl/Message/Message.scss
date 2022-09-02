@@ -1,0 +1,17 @@
+@import 'src/styles/functions';
+@import 'src/styles/mixins';
+
+.ElementControlFlowMessage {
+  @include flex-c;
+  animation: ModalView__container 1.2s ease-in-out 1;
+}
+
+.ElementControlFlowMessage__input {
+  color: var(--term-js-text);
+  background: var(--term-js-header-bg);
+  padding: unit(2);
+  border: var(--term-js-modals-border) unit(0.25) solid;
+  width: calc(100% - #{unit(4)});
+  box-sizing: border-box;
+  max-width: unit(120);
+}
