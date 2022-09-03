@@ -1,0 +1,29 @@
+@import 'src/styles/functions';
+@import 'src/styles/mixins';
+
+.HelpFlow__row {
+  @include padding-v(1);
+  max-width: unit(100);
+  margin-bottom: unit(3);
+  line-height: 1.3;
+  &:hover {
+    background-color: var(--term-js-modals-close-active);
+
+    .HelpFlow__text {
+      opacity: 1;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.HelpFlow__title {
+  font-weight: 600;
+}
+
+.HelpFlow__text {
+  opacity: 0.3;
+  cursor: default;
+}

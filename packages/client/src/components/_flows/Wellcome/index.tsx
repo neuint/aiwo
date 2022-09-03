@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useCallback } from 'react';
+import React, { FC, useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ModalComponent } from '@neuint/modals-plugin-react';
 
@@ -29,6 +29,7 @@ const WellcomeFlow: FC<PropsType> = (
   const isHelpShown = useSelector((state: StateType) => checkShown(state, WELLCOME_HELP));
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const withHelp = useRef(isHelpShown);
   const connect = useCallback((serverHost: string) => {
     setModal(
       <ModalComponent>
@@ -56,14 +57,14 @@ const WellcomeFlow: FC<PropsType> = (
       onConnect();
       setWrite(getWrite([
         { value: t('_flows.wellcome.connected.0', { serverHost: host }), withSubmit: true },
-        ...(isHelpShown ? [] : [
+        ...(withHelp.current ? [] : [
           t('_flows.wellcome.connected.1'),
           { str: t('_flows.wellcome.connected.2'), className: 'WellcomeFlow__accent' },
           { value: t('_flows.wellcome.connected.3'), withSubmit: true },
         ]),
       ]));
     }
-  }, [t, host, connected, isHelpShown, onConnect, setModal, setWrite]);
+  }, [t, host, connected, onConnect, setModal, setWrite]);
 
   useEffect(() => {
     if (connected && !isHelpShown) dispatch(tipsShown(WELLCOME_HELP));

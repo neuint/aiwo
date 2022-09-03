@@ -10,7 +10,8 @@
     "enterMaterial": "Enter material: ",
     "enterMaterialWithDefault": "Enter material [{{defaultValue}}]: ",
     "choosePosition": "Please choose element position on the workspace or press ESC to cancel.",
-    "notSelected": "Please select element before."
+    "notSelected": "Please select element before.",
+    "exitModal": "Click outside the modal to exit."
   },
   "_errors": {
     "errUnknown": "Unexpected error please try again.",
@@ -33,7 +34,7 @@
         "Connection is established with host {{serverHost}}",
         "Use command ",
         "help ",
-        "to see available commands and shortcuts."
+        "to see available commands."
       ],
       "initMessage": [
         "Wellcome to the ",
@@ -62,24 +63,34 @@
     "yes": "yes|",
     "no": "no:"
   },
+  "HelpFlow": {
+    "help": "help",
+    "title": "Available commands",
+    "delimiter": ": "
+  },
   "AddElementFlow": {
-    "add": "add element"
+    "add": "add element",
+    "addDescription": "add new element to the workspace."
   },
   "RemoveElementFlow": {
     "remove": "remove element",
+    "removeDescription": "remove selected element(s) from the workspace.",
     "question": {
       "one": "Do you want to remove selected element?",
       "other": "Do you want to remove {{count}} selected elements?"
     }
   },
   "EditElementFlow": {
-    "edit": "edit element"
+    "edit": "edit element",
+    "editDescription": "edit element common parameters."
   },
   "WorldClearSelectionFlow": {
-    "clear": "clear selection"
+    "clear": "clear selection",
+    "clearDescription": "remove selection from the all selected elements in workspace."
   },
   "ElementControlFlow": {
-    "control": "control element"
+    "control": "control element",
+    "controlDescription": "get control of the selected element."
   },
   "ElementControlFlowModal": {
     "title": "Use next keys to control element",
@@ -108,8 +119,7 @@
     "t": "T",
     "space": "Space",
     "esc": "Esc",
-    "clearSelection": "clear selection",
-    "exit": "Click outside modal to exit cotrol mode."
+    "clearSelection": "clear selection"
   },
   "ConsoleStatusBar": {
     "connected": "Connected to {{serverHost}}",

@@ -125,7 +125,7 @@ const ElementControlFlowModal: FC<PropsType> = ({ onClose, plugin }: PropsType) 
         </div>
       </div>
       <div className="ElementControlFlowModal__exit">
-        {t('ElementControlFlowModal.exit')}
+        {t('_common.exitModal')}
       </div>
     </ModalComponent>
   );

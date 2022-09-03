@@ -13,7 +13,7 @@ import FlowsComponent, { FlowsType } from '@neuint/flows-plugin-react';
 import ModalsComponent from '@neuint/modals-plugin-react';
 
 import WellcomeFlow from '@flows/Wellcome';
-import AccountFlow from '@flows/Account';
+import HelpFlow from '@flows/Help';
 import ElementFlow from '@root/components/_flows/Element';
 import WorldFlow from '@root/components/_flows/World';
 import { DELIMITER } from '@constants/terminal';
@@ -37,7 +37,7 @@ const Console: FC = () => {
   const onConnect = useCallback(() => {
     setFlows({});
     setShowWellcome(false);
-  }, [setShowWellcome, setFlows]);
+  }, [setFlows]);
 
   const addFlow = useCallback((additionalFlow: FlowsType) => {
     setFlows((prevFlows) => {
@@ -85,7 +85,7 @@ const Console: FC = () => {
         <WellcomeFlow {...rootFlowProps} onConnect={onConnect} />
       ) : (
         <>
-          <AccountFlow {...rootFlowProps} />
+          <HelpFlow {...rootFlowProps} />
           <ElementFlow {...rootFlowProps} />
           <WorldFlow {...rootFlowProps} />
         </>
