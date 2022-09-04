@@ -34,7 +34,7 @@
         "Connection is established with host {{serverHost}}",
         "Use command ",
         "help ",
-        "to see available commands."
+        "to see available commands and shorcuts."
       ],
       "initMessage": [
         "Wellcome to the ",
@@ -65,8 +65,15 @@
   },
   "HelpFlow": {
     "help": "help",
-    "title": "Available commands",
-    "delimiter": ": "
+    "title": "Available commands and shorcuts",
+    "cmdB": "Cmd + B",
+    "ctrlB": "Ctrl + B",
+    "toggleConsole": "hide/show the console.",
+    "cmdY": "Cmd + Y",
+    "ctrlY": "Ctrl + Y",
+    "historySearch": "autocomplete command using the history of the executed commands.",
+    "tab": "Tab",
+    "commandSearch": "autocomplete command."
   },
   "AddElementFlow": {
     "add": "add element",
@@ -90,11 +97,7 @@
   },
   "ElementControlFlow": {
     "control": "control element",
-    "controlDescription": "get control of the selected element.",
-    "ctrlShiftDown": "Ctrl + Shift + ↓",
-    "hideConsole": "hide console.",
-    "ctrlShiftUp": "Ctrl + Shift + ↑",
-    "showConsole": "show console."
+    "controlDescription": "get control of the selected element."
   },
   "ElementControlFlowModal": {
     "title": "Use next keys to control element",

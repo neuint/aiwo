@@ -5,6 +5,7 @@ import View from '@presentations/App';
 import WorldHoverContext from '@context/WorldHover';
 import WorldBackground from '@root/components/_background/World';
 import { getControlElement } from '@ducks/world/selectors';
+import { IS_MAC } from '@root/utils/bowser';
 
 const App = (): React.ReactElement => {
   const controlElement = useSelector(getControlElement);
@@ -13,15 +14,13 @@ const App = (): React.ReactElement => {
 
   const keyDownHandler = useCallback((ev: KeyboardEvent) => {
     const key = ev.key.toLowerCase();
-    if (key === 'arrowup' && ev.ctrlKey && ev.shiftKey) {
+
+    const mainKey = IS_MAC ? ev.metaKey : ev.ctrlKey;
+
+    if (key === 'b' && mainKey) {
       ev.preventDefault();
       ev.stopPropagation();
-      setConsoleClosed(false);
-    }
-    if (key === 'arrowdown' && ev.ctrlKey && ev.shiftKey) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      setConsoleClosed(true);
+      setConsoleClosed((value) => !value);
     }
   }, []);
 

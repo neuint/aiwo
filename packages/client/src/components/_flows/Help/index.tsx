@@ -5,6 +5,7 @@ import './index.scss';
 
 import { CommonPropsType } from '@root/components/_flows/types';
 import useTranslation from '@hooks/useTranslation';
+import { IS_MAC } from '@root/utils/bowser';
 
 type PropsType = CommonPropsType;
 
@@ -44,12 +45,16 @@ const HelpFlow: FC<PropsType> = ({ setFlows, setModal, addCommands }: PropsType)
           <div className="HelpFlow__text">{t('ElementControlFlow.controlDescription')}</div>
         </div>
         <div className="HelpFlow__row">
-          <div className="HelpFlow__title">{t('ElementControlFlow.ctrlShiftDown')}</div>
-          <div className="HelpFlow__text">{t('ElementControlFlow.hideConsole')}</div>
+          <div className="HelpFlow__title">{t(IS_MAC ? 'HelpFlow.cmdB' : 'HelpFlow.ctrlB')}</div>
+          <div className="HelpFlow__text">{t('HelpFlow.toggleConsole')}</div>
         </div>
         <div className="HelpFlow__row">
-          <div className="HelpFlow__title">{t('ElementControlFlow.ctrlShiftUp')}</div>
-          <div className="HelpFlow__text">{t('ElementControlFlow.showConsole')}</div>
+          <div className="HelpFlow__title">{t(IS_MAC ? 'HelpFlow.cmdY' : 'HelpFlow.ctrlY')}</div>
+          <div className="HelpFlow__text">{t('HelpFlow.historySearch')}</div>
+        </div>
+        <div className="HelpFlow__row">
+          <div className="HelpFlow__title">{t('HelpFlow.tab')}</div>
+          <div className="HelpFlow__text">{t('HelpFlow.commandSearch')}</div>
         </div>
         <div>{t('_common.exitModal')}</div>
       </ModalComponent>,
