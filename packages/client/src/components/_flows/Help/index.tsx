@@ -56,7 +56,7 @@ const HelpFlow: FC<PropsType> = ({ setFlows, setModal, addCommands }: PropsType)
           <div className="HelpFlow__title">{t('HelpFlow.tab')}</div>
           <div className="HelpFlow__text">{t('HelpFlow.commandSearch')}</div>
         </div>
-        <div>{t('_common.exitModal')}</div>
+        <div className="HelpFlow__exit">{t('_common.exitModal')}</div>
       </ModalComponent>,
     );
     return Promise.resolve(undefined);

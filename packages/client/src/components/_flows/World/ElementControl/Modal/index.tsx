@@ -124,7 +124,7 @@ const ElementControlFlowModal: FC<PropsType> = ({ onClose, plugin }: PropsType) 
           {t('ElementControlFlowModal.clearSelection')}
         </div>
       </div>
-      <div className="ElementControlFlowModal__exit">
+      <div className="ModalView__exit">
         {t('_common.exitModal')}
       </div>
     </ModalComponent>
