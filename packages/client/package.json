@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "git@github.com:neuint/aiwo.git",
   "author": "Pavlo <p.gusar@yahoo.com>",
   "license": "MIT",
