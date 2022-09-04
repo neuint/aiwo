@@ -3,12 +3,12 @@
     "aiwo": "AIWO",
     "space": " ",
     "enterWidth": "Enter width: ",
-    "enterWidthWithDefault": "Enter width [{{defaultValue}}]: ",
+    "enterWidthWithDefault": "Enter width [{{default}}]: ",
     "widthMinError": "Width must be greater or equal {{min}}.",
-    "enterHeight": "Enter height [{{defaultValue}}]: ",
+    "enterHeight": "Enter height [{{default}}]: ",
     "heightMinError": "Height must be greater or equal {{min}}.",
     "enterMaterial": "Enter material: ",
-    "enterMaterialWithDefault": "Enter material [{{defaultValue}}]: ",
+    "enterMaterialWithDefault": "Enter material [{{default}}]: ",
     "choosePosition": "Please choose element position on the workspace or press ESC to cancel.",
     "notSelected": "Please select element before.",
     "exitModal": "Click outside the modal to exit."
@@ -90,7 +90,11 @@
   },
   "ElementControlFlow": {
     "control": "control element",
-    "controlDescription": "get control of the selected element."
+    "controlDescription": "get control of the selected element.",
+    "ctrlShiftDown": "Ctrl + Shift + ↓",
+    "hideConsole": "hide console.",
+    "ctrlShiftUp": "Ctrl + Shift + ↑",
+    "showConsole": "show console."
   },
   "ElementControlFlowModal": {
     "title": "Use next keys to control element",

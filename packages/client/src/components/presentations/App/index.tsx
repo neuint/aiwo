@@ -13,14 +13,19 @@ const IS_CHROME = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(naviga
 type PropsType = {
   onHover: (idList: string[]) => void;
   withInput?: boolean;
+  toggleHideConsole: () => void;
+  isConsoleClosed: boolean;
 };
 
-const App: FC<PropsType> = ({ onHover, withInput = true }: PropsType) => {
+const App: FC<PropsType> = (
+  { onHover, toggleHideConsole, isConsoleClosed, withInput = true }: PropsType,
+) => {
   const { t } = useTranslation();
+
   return (
     <div className="App">
       <World onHover={onHover} className="App__world" />
-      <div className="App__consoleWrapper">
+      <div className={cn('App__consoleWrapper', { 'App__consoleWrapper--hidden': isConsoleClosed })}>
         <div className="App__consoleBackgroundWrapper">
           <div className="App__consoleBackgroud" />
         </div>
@@ -30,7 +35,18 @@ const App: FC<PropsType> = ({ onHover, withInput = true }: PropsType) => {
         />
         {IS_CHROME ? (
           <div className="App__console">
-            <Console />
+            <button onClick={toggleHideConsole} type="button" className="App__consoleControl">
+              {isConsoleClosed ? (
+                <svg viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M7,15L12,10L17,15H7Z" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M7,10L12,15L17,10H7Z" />
+                </svg>
+              )}
+            </button>
+            <Console disabled={isConsoleClosed} />
           </div>
         ) : (
           <div className="App__notSupported">

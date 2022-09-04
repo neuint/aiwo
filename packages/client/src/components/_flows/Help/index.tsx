@@ -24,29 +24,32 @@ const HelpFlow: FC<PropsType> = ({ setFlows, setModal, addCommands }: PropsType)
         title={t('HelpFlow.title')}
       >
         <div className="HelpFlow__row">
-          <span className="HelpFlow__title">{t('AddElementFlow.add')}</span>
-          <span className="HelpFlow__text">{t('HelpFlow.delimiter')}</span>
-          <span className="HelpFlow__text">{t('AddElementFlow.addDescription')}</span>
+          <div className="HelpFlow__title">{t('AddElementFlow.add')}</div>
+          <div className="HelpFlow__text">{t('AddElementFlow.addDescription')}</div>
         </div>
         <div className="HelpFlow__row">
-          <span className="HelpFlow__title">{t('RemoveElementFlow.remove')}</span>
-          <span className="HelpFlow__text">{t('HelpFlow.delimiter')}</span>
-          <span className="HelpFlow__text">{t('RemoveElementFlow.removeDescription')}</span>
+          <div className="HelpFlow__title">{t('RemoveElementFlow.remove')}</div>
+          <div className="HelpFlow__text">{t('RemoveElementFlow.removeDescription')}</div>
         </div>
         <div className="HelpFlow__row">
-          <span className="HelpFlow__title">{t('EditElementFlow.edit')}</span>
-          <span className="HelpFlow__text">{t('HelpFlow.delimiter')}</span>
-          <span className="HelpFlow__text">{t('EditElementFlow.editDescription')}</span>
+          <div className="HelpFlow__title">{t('EditElementFlow.edit')}</div>
+          <div className="HelpFlow__text">{t('EditElementFlow.editDescription')}</div>
         </div>
         <div className="HelpFlow__row">
-          <span className="HelpFlow__title">{t('WorldClearSelectionFlow.clear')}</span>
-          <span className="HelpFlow__text">{t('HelpFlow.delimiter')}</span>
-          <span className="HelpFlow__text">{t('WorldClearSelectionFlow.clearDescription')}</span>
+          <div className="HelpFlow__title">{t('WorldClearSelectionFlow.clear')}</div>
+          <div className="HelpFlow__text">{t('WorldClearSelectionFlow.clearDescription')}</div>
         </div>
         <div className="HelpFlow__row">
-          <span className="HelpFlow__title">{t('ElementControlFlow.control')}</span>
-          <span className="HelpFlow__text">{t('HelpFlow.delimiter')}</span>
-          <span className="HelpFlow__text">{t('ElementControlFlow.controlDescription')}</span>
+          <div className="HelpFlow__title">{t('ElementControlFlow.control')}</div>
+          <div className="HelpFlow__text">{t('ElementControlFlow.controlDescription')}</div>
+        </div>
+        <div className="HelpFlow__row">
+          <div className="HelpFlow__title">{t('ElementControlFlow.ctrlShiftDown')}</div>
+          <div className="HelpFlow__text">{t('ElementControlFlow.hideConsole')}</div>
+        </div>
+        <div className="HelpFlow__row">
+          <div className="HelpFlow__title">{t('ElementControlFlow.ctrlShiftUp')}</div>
+          <div className="HelpFlow__text">{t('ElementControlFlow.showConsole')}</div>
         </div>
         <div>{t('_common.exitModal')}</div>
       </ModalComponent>,

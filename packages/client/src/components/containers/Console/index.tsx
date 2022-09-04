@@ -20,7 +20,11 @@ import { DELIMITER } from '@constants/terminal';
 import ConsoleStatusBar from '@containers/ConsoleStatusBar';
 import ConsoleAutoFocus from '@containers/ConsoleAutoFocus';
 
-const Console: FC = () => {
+type PropsType = {
+  disabled?: boolean;
+};
+
+const Console: FC<PropsType> = ({ disabled }: PropsType) => {
   const [flows, setFlows] = useState<FlowsType | undefined>();
   const [commands, setCommands] = useState<string[]>([]);
   const [tempCommands, setTempCommands] = useState<{
@@ -66,6 +70,7 @@ const Console: FC = () => {
   return (
     <>
       <TermComponent
+        disabled={disabled}
         write={write}
         delimiter={DELIMITER}
       >

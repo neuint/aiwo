@@ -3,15 +3,12 @@
 
 .HelpFlow__row {
   @include padding-v(1);
+  display: flex;
   max-width: unit(100);
   margin-bottom: unit(3);
   line-height: 1.3;
   &:hover {
     background-color: var(--term-js-modals-close-active);
-
-    .HelpFlow__text {
-      opacity: 1;
-    }
   }
 
   &:last-child {
@@ -21,9 +18,10 @@
 
 .HelpFlow__title {
   font-weight: 600;
+  width: unit(40);
 }
 
 .HelpFlow__text {
-  opacity: 0.3;
+  flex: 1;
   cursor: default;
 }

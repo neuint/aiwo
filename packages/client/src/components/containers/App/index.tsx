@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import View from '@presentations/App';
@@ -9,6 +9,29 @@ import { getControlElement } from '@ducks/world/selectors';
 const App = (): React.ReactElement => {
   const controlElement = useSelector(getControlElement);
   const [hoverList, setHoverList] = useState<string[]>([]);
+  const [isConsoleClosed, setConsoleClosed] = useState(false);
+
+  const keyDownHandler = useCallback((ev: KeyboardEvent) => {
+    const key = ev.key.toLowerCase();
+    if (key === 'arrowup' && ev.ctrlKey && ev.shiftKey) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      setConsoleClosed(false);
+    }
+    if (key === 'arrowdown' && ev.ctrlKey && ev.shiftKey) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      setConsoleClosed(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      window.removeEventListener('keydown', keyDownHandler);
+    };
+  }, [keyDownHandler]);
 
   const hoverHandler = useCallback((uuidList: string[]) => {
     setHoverList((prevHoverList) => {
@@ -17,9 +40,18 @@ const App = (): React.ReactElement => {
     });
   }, []);
 
+  const toggleHideConsole = useCallback(() => {
+    setConsoleClosed((value) => !value);
+  }, [setConsoleClosed]);
+
   return (
     <WorldHoverContext.Provider value={hoverList}>
-      <View withInput={Boolean(controlElement)} onHover={hoverHandler} />
+      <View
+        isConsoleClosed={isConsoleClosed}
+        withInput={Boolean(controlElement)}
+        onHover={hoverHandler}
+        toggleHideConsole={toggleHideConsole}
+      />
       <WorldBackground />
     </WorldHoverContext.Provider>
   );

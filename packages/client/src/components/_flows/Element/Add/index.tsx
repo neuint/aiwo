@@ -85,7 +85,7 @@ const AddElementFlow: FC<CommonPropsType> = (props: CommonPropsType) => {
   }, []);
 
   const heightLabelGetter = useCallback((data: { [key: string]: string }) => {
-    return getLabel(t('_common.enterHeight', { defaultValue: data.width }));
+    return getLabel(t('_common.enterHeight', { default: data.width }));
   }, [t]);
 
   return (

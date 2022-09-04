@@ -1,7 +1,9 @@
-import i18n from 'i18n-js';
+import { I18n } from 'i18n-js';
 
 import { TYPE_ERROR } from '@root/constants/errors';
 import appConfig from '@root/appConfig.json';
+
+const i18n = new I18n();
 
 const loadInfo = async (): Promise<{ default: string, list: string[] }> => {
   const data = await fetch(appConfig.localeInfoPath);
