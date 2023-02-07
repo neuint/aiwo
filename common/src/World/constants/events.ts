@@ -1,4 +1,5 @@
 export const INIT = 'init';
+export const REINIT = 'reinit';
 export const ADD_ELEMENT = 'addElement';
 export const REMOVE_ELEMENT = 'removeElement';
 export const UPDATE_ELEMENT = 'updateElement';

@@ -1,7 +1,7 @@
 import IWorldBridge from '@common/World/IWorldBridge';
 import {
   ADD_ELEMENT, BACK, FORWARD, INIT, MESSAGE, REMOVE_ELEMENT, ROTATE_LEFT, ROTATE_RIGHT,
-  UPDATE_ELEMENT, VIEW_ANGLE, PUSH, PULL, BITE_OFF, BREAK, COMBINE, COLLISION, LEFT, RIGHT,
+  UPDATE_ELEMENT, VIEW_ANGLE, PUSH, PULL, BITE_OFF, BREAK, COMBINE, COLLISION, LEFT, RIGHT, REINIT,
 } from '@common/World/constants/events';
 import IElement from '@common/World/elements/IElement';
 import { elementFactory } from '@common/World/elements';
@@ -58,6 +58,10 @@ class WorldBridge extends EventEmitter implements IWorldBridge, IEventEmitter {
       return initReject ? initReject(new Error('broken data')) : undefined;
     }
     this.elements = list as IElement[];
+    if (this.isInitialized) {
+      this.emit(REINIT);
+      return undefined;
+    }
     this.isInitialized = true;
     return initResolve ? initResolve(true) : undefined;
   };

@@ -120,7 +120,7 @@ const EditElementFlow: FC<CommonPropsType> = (props: CommonPropsType) => {
         name="width"
         minValue={MIN_SIZE}
         defaultValue={element?.width}
-        write={getLabel(t('_common.enterWidthWithDefault', { defaultValue: element?.width }))}
+        write={getLabel(t('_common.enterWidthWithDefault', { default: element?.width }))}
         addStep={addStep}
         replaceStep={replaceStep}
       />
@@ -129,7 +129,7 @@ const EditElementFlow: FC<CommonPropsType> = (props: CommonPropsType) => {
         name="height"
         minValue={MIN_SIZE}
         defaultValue={element?.height}
-        write={getLabel(t('_common.enterHeight', { defaultValue: element?.height }))}
+        write={getLabel(t('_common.enterHeight', { default: element?.height }))}
         addStep={addStep}
         replaceStep={replaceStep}
       />
@@ -138,7 +138,7 @@ const EditElementFlow: FC<CommonPropsType> = (props: CommonPropsType) => {
         name="material"
         values={materials}
         defaultValue={currentMaterial}
-        write={getLabel(t('_common.enterMaterialWithDefault', { defaultValue: currentMaterial }))}
+        write={getLabel(t('_common.enterMaterialWithDefault', { default: currentMaterial }))}
         addStep={addStep}
         replaceStep={replaceStep}
         onSubmit={setPosition}

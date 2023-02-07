@@ -91,6 +91,20 @@ server.addListener(EVENTS.CONNECT, ({ id }) => {
   server.send(id, JSON.stringify({ type: INIT, elementParamList: world.elementParamList }));
 });
 
+server.router.get('/world', (ctx, next) => {
+  ctx.body = JSON.stringify({ elementParamList: world.elementParamList });
+  next();
+});
+
+server.router.post('/world', (ctx, next) => {
+  const { elementParamList } = (ctx.request?.body || {}) as { elementParamList?: BaseParamsType[] };
+  if (elementParamList && elementParamList.length) {
+    world.elementParamList = elementParamList;
+    server.broadcast(JSON.stringify({ type: INIT, elementParamList }));
+  }
+  ctx.body = JSON.stringify({ status: 'ok' });
+  next();
+});
 
 server.addListener(EVENTS.MESSAGE, (message) => {
   try {

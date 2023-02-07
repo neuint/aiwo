@@ -63,6 +63,15 @@ class World extends EventEmitter implements IWorld {
     return list;
   }
 
+  set elementParamList(list: BaseParamsType[]) {
+    const elementMap = new Map<number, IElement>();
+    list.forEach((params) => {
+      const element = elementFactory(params);
+      elementMap.set(params.id, element);
+    });
+    this.elementMap = elementMap;
+  }
+
   get elements(): IElement[] {
     const { elementMap } = this;
     const list: IElement[] = [];
