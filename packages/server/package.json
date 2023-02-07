@@ -9,6 +9,9 @@
     "start": "ts-node src/start.ts"
   },
   "devDependencies": {
+    "@types/koa": "^2.13.5",
+    "@types/koa-bodyparser": "^4.3.10",
+    "@types/koa__router": "^12.0.0",
     "@types/lodash": "^4.14.184",
     "@types/websocket": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
@@ -18,7 +21,10 @@
     "typescript": "^4.8.2"
   },
   "dependencies": {
+    "@koa/router": "^12.0.0",
     "@types/node": "^18.7.14",
+    "koa": "^2.14.1",
+    "koa-bodyparser": "^4.3.0",
     "lodash": "^4.17.21",
     "websocket": "^1.0.34"
   }
