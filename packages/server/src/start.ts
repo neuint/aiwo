@@ -98,6 +98,7 @@ server.router.get('/world', (ctx, next) => {
 
 server.router.post('/world', (ctx, next) => {
   const { elementParamList } = (ctx.request?.body || {}) as { elementParamList?: BaseParamsType[] };
+
   if (elementParamList && elementParamList.length) {
     world.elementParamList = elementParamList;
     server.broadcast(JSON.stringify({ type: INIT, elementParamList }));
