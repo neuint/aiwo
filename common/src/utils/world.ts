@@ -1,7 +1,7 @@
 import { last } from 'lodash';
 
 import IElement from '../World/elements/IElement';
-import { ElementLineType, ElementPointType, PointType } from '../World/types/elemets';
+import { BaseParamsType, ElementLineType, ElementPointType, PointType } from '../World/types/elemets';
 import { VIEW_ZONE_ANGLE, VIEW_ZONE_ANGLE_POINTS_STEP } from '../World/constants/parameters';
 import { getLinesIntersect } from './line';
 import { checkBoxesCollision } from './box';
@@ -110,3 +110,92 @@ export const getViewPointsOfElements = (
   return getViewZonePoints(viewZoneElement, elementLines);
 };
 
+const generateElementInfo = (() => {
+  const minSize = 10;
+  const maxSize = 40;
+
+  return (material: string): BaseParamsType => {
+
+    const width = Math.floor(Math.random() * (maxSize - minSize)) + minSize;
+    const height = Math.floor(Math.random() * (maxSize - minSize)) + minSize;
+    return {
+      width, height, viewAngle: 0, color: material, angle: 0, x: 0, y: 0, power: 10000,
+    } as BaseParamsType;
+  };
+})();
+
+const getMaterial = (() => {
+  const allMaterials = Object.values(MATERIALS);
+  const withoutCharacterMaterials = Object.values(MATERIALS)
+    .filter((material) => material !== MATERIALS.PERSON_MATERIAL);
+
+  return (withoutCharacters: boolean): string => {
+    const materials = withoutCharacters ? withoutCharacterMaterials : allMaterials;
+    const index = Math.floor(Math.random() * materials.length);
+    return materials[index];
+  };
+})();
+
+const getBoxCoordinates = (
+  element: BaseParamsType,
+): { startX: number, endX: number, startY: number, endY: number } => {
+  const { width, height, x, y } = element as (BaseParamsType & { width: number, height: number });
+  const halfWidth = width / 2;
+  const halfHeight = height / 2;
+  return {
+    startX: x - halfWidth,
+    endX: x + halfWidth,
+    startY: y - halfHeight,
+    endY: y + halfHeight,
+  }
+};
+
+export const generateWorldInfo = (() => {
+
+  const minGroupCount = 1;
+  const maxGroupCount = 30;
+  const groupCountDiff = maxGroupCount - minGroupCount;
+  const minDistance = -100;
+  const maxDistance = 100;
+  const distanceDiff = maxDistance - minDistance;
+  const minGroupDistance = -500;
+  const maxGroupDistance = 500;
+  const groupDistanceDiff = maxGroupDistance - minGroupDistance;
+
+  return (amount: number, withoutCharacters: boolean): BaseParamsType[] => {
+    const elements: BaseParamsType[] = [];
+    const boxes: { startX: number, endX: number, startY: number, endY: number }[] = [];
+    let x = 0;
+    let y = 0;
+
+    while (elements.length < amount) {
+      const leftAmount = amount - elements.length;
+      const material = getMaterial(withoutCharacters);
+      const groupCount = material === MATERIALS.PERSON_MATERIAL ? 1 : Math.min(
+        Math.floor(Math.random() * (groupCountDiff)) + minGroupCount,
+        leftAmount,
+      );
+      for (let i = 0; i < groupCount; i++) {
+        const element = generateElementInfo(material);
+        const xDistance = Math.floor(Math.random() * (distanceDiff)) + minDistance;
+        const yDistance = Math.floor(Math.random() * (distanceDiff)) + minDistance;
+        x += xDistance;
+        y += yDistance;
+        element.x = x;
+        element.y = y;
+        const box = getBoxCoordinates(element);
+        const isCollision = boxes.some((checkBox) => {
+          return checkBoxesCollision(checkBox, box);
+        });
+        if (!isCollision) {
+          boxes.push(box);
+          elements.push(element);
+        }
+      }
+      x += Math.floor(Math.random() * (groupDistanceDiff)) + minGroupDistance;
+      y += Math.floor(Math.random() * (groupDistanceDiff)) + minGroupDistance;
+    }
+
+    return elements;
+  };
+})()

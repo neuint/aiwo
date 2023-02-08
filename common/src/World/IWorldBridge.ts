@@ -6,6 +6,7 @@ import IEventEmitter from '../EventEmitter/IEventEmitter';
 export default interface IWorldBridge extends IWorldSimple, IEventEmitter {
   init(): Promise<boolean>;
   addElement(params: BaseParamsType): void;
+  initElements(params: BaseParamsType[]): Promise<void>;
   forward(data: number | IElement, step: number): void;
   back(data: number | IElement, step: number): void;
   rotateLeft(data: number | IElement, step: number): void;

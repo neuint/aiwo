@@ -22,6 +22,10 @@ class WorldBridge extends EventEmitter implements IWorldBridge, IEventEmitter {
 
   private socket: WebSocket;
 
+  private port: number;
+
+  private host: string;
+
   private isInitialized = false;
 
   private initPromise?: Promise<boolean>;
@@ -32,6 +36,8 @@ class WorldBridge extends EventEmitter implements IWorldBridge, IEventEmitter {
 
   private constructor(port: number, host: string) {
     super();
+    this.port = port;
+    this.host = host;
     this.socket = new WebSocket(`ws://${host}:${port}`);
     this.socket.addEventListener('message', this.onSocketMessage);
     this.initPromise = this.init();
@@ -44,6 +50,26 @@ class WorldBridge extends EventEmitter implements IWorldBridge, IEventEmitter {
       this.initResolve = resolve;
       this.initReject = reject;
     });
+  };
+
+  initElements = async (params: BaseParamsType[]): Promise<void> => {
+    if (!this.isInitialized) return;
+    const { host, port } = this;
+    const resp = await fetch(`http://${host}:${port}/world`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        elementParamList: params.map((param, index) => ({
+          id: index + 1,
+          angle: 0,
+          label: '',
+          ...param,
+        })),
+      }),
+    });
+    if (resp.status !== 200) throw new Error('broken data');
+    const json = await resp.json();
+    if (json.status !== 'ok') throw new Error('broken data');
   };
 
   private onInitElements = (json: { [key: string]: any }): void => {

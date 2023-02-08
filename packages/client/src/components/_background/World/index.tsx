@@ -12,6 +12,7 @@ import {
   worldSet, worldNew, worldRemove, worldEdit, worldAddCollision, worldAddMessage,
 } from '@ducks/world';
 import { BaseParamsType, PointType, ElementMessageType } from '@common/World/types/elemets';
+import { connectionLoginSuccess } from '@root/ducks/connection';
 
 const World: FC = () => {
   const dispatch = useDispatch();
