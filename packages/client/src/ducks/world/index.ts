@@ -11,6 +11,9 @@ export const SET_TEMP = 'world@SET_TEMP';
 export const NEW = 'world@NEW';
 export const EDIT = 'world@EDIT';
 export const CREATE = 'world@CREATE';
+export const EXPORT = 'world@EXPORT';
+export const EXPORT_ERROR = 'world@EXPORT_ERROR';
+export const EXPORT_SUCCESS = 'world@EXPORT_SUCCESS';
 export const CREATE_SUCCESS = 'world@CREATE_SUCCESS';
 export const CREATE_ERROR = 'world@CREATE_ERROR';
 export const UPDATE = 'world@UPDATE';
@@ -32,6 +35,9 @@ export const SET_OUT = 'world@SET_OUT';
 
 export const {
   worldSet,
+  worldExport,
+  worldExportError,
+  worldExportSuccess,
   worldSetTemp,
   worldNew,
   worldEdit,
@@ -56,6 +62,9 @@ export const {
   worldSetOut,
 } = createActions(
   SET,
+  EXPORT,
+  EXPORT_ERROR,
+  EXPORT_SUCCESS,
   SET_TEMP,
   NEW,
   EDIT,
@@ -80,6 +89,9 @@ export const {
   SET_OUT,
 ) as {
   worldSet: (payload: BaseParamsType[]) => StoreActionType<BaseParamsType[]>;
+  worldExport: (payload: BaseParamsType[]) => StoreActionType<BaseParamsType[]>;
+  worldExportError: (payload: string) => StoreActionType<string>;
+  worldExportSuccess: () => StoreActionType<undefined>;
   worldSetTemp: (payload: BaseParamsType) => StoreActionType<BaseParamsType>;
   worldCreate: (payload: BaseParamsType) => StoreActionType<BaseParamsType>;
   worldClearTemp: () => StoreActionType<undefined>;
@@ -108,6 +120,8 @@ export const {
 
 export type StateType = {
   changeIndex: number;
+  generating: boolean;
+  generateError: string;
   temp?: BaseParamsType;
   tempCreating: boolean;
   tempCreateError: string;
@@ -127,6 +141,8 @@ export type StateType = {
 
 export const defaultState: StateType = {
   changeIndex: 0,
+  generating: false,
+  generateError: '',
   temp: undefined,
   tempCreating: false,
   tempCreateError: '',
@@ -143,6 +159,21 @@ export const defaultState: StateType = {
 };
 
 export default handleActions<StateType, any>({
+  [EXPORT]: (state: StateType) => ({
+    ...state,
+    generating: true,
+    generateError: '',
+  }),
+  [EXPORT_ERROR]: (state: StateType, action: StoreActionType<string>) => ({
+    ...state,
+    generating: false,
+    generateError: action.payload,
+  }),
+  [EXPORT_SUCCESS]: (state: StateType) => ({
+    ...state,
+    generating: false,
+    generateError: '',
+  }),
   [SET_OUT]: (state, { payload }) => ({
     ...state,
     out: payload,

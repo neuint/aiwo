@@ -12,13 +12,14 @@ import WorldPositionContext, { PositionType } from '@context/WorldPosition';
 import WorldClickContext from '@context/WorldClick';
 import { checkConnected } from '@ducks/connection/selectors';
 import { worldCreate, worldUpdate, worldSetOut } from '@ducks/world';
-import { getElementIdList, getTempElement, getTempId, getControlId } from '@ducks/world/selectors';
+import { getTempElement, getTempId, getControlId } from '@ducks/world/selectors';
 import WorldBridge from '@root/WorldBridge';
 import IElement from '@common/World/elements/IElement';
 import { getRadians } from '@common/utils/angle';
 import { getMinimalRotationGetter } from '@root/utils/world';
 import { UPDATE_ELEMENT } from '@common/World/constants/events';
 import { BaseParamsType } from '@common/World/types/elemets';
+import useViewportElements from '@root/hooks/useViewportElements';
 
 const FOCUS_INCREASE = 11;
 
@@ -31,7 +32,6 @@ const World: FC<PropsType> = ({ className, onHover }: PropsType) => {
   const dispatch = useDispatch();
   const connected = useSelector(checkConnected);
   const tempElement = useSelector(getTempElement);
-  const elementIdList = useSelector(getElementIdList);
   const tempId = useSelector(getTempId);
   const controlId = useSelector(getControlId);
   const container = useRef<HTMLDivElement>(null);
@@ -50,6 +50,8 @@ const World: FC<PropsType> = ({ className, onHover }: PropsType) => {
   const [scene, setScene] = useState<THREE.Scene>();
   const [position, setPosition] = useState<PositionType>({ x: 0, y: 0 });
   const [clickList, setClickList] = useState<string[]>([]);
+
+  const viewportIdList = useViewportElements(camera, container);
 
   useEffect(() => {
     controlIdRef.current = controlId;
@@ -345,6 +347,14 @@ const World: FC<PropsType> = ({ className, onHover }: PropsType) => {
     };
   }, [updateElementHandler, connected]);
 
+  const elements = useMemo(() => {
+    return scene ? viewportIdList.map((id: number) => {
+      return tempId === id ? null : (
+        <WorldElement key={id} id={id} scene={scene} />
+      );
+    }) : null;
+  }, [viewportIdList, scene, tempId]);
+
   return (
     <WorldClickContext.Provider value={clickList}>
       <WorldPositionContext.Provider value={position}>
@@ -360,11 +370,7 @@ const World: FC<PropsType> = ({ className, onHover }: PropsType) => {
           onWheel={wheelHandler}
         />
         {scene && (<WorldTempElement scene={scene} />)}
-        {scene ? elementIdList.map((id: number) => {
-          return tempId !== id ? (
-            <WorldElement key={id} id={id} scene={scene} />
-          ) : null;
-        }) : null}
+        {elements}
         {scene && (<WorldMessages scene={scene} />)}
       </WorldPositionContext.Provider>
     </WorldClickContext.Provider>

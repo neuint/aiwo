@@ -7,6 +7,12 @@ export const getElements = (
   state: StateType,
 ): { [key: number]: BaseParamsType } => state.world.elements;
 
+export const checkGenerating = (state: StateType): boolean => state.world.generating;
+
+export const getGenerateError = (state: StateType): string => {
+  return state.world.generateError;
+};
+
 export const getElementById = (state: StateType, id?: number): BaseParamsType | undefined => {
   return id ? state.world.elements[id] : undefined;
 };
@@ -16,6 +22,8 @@ export const getControlElement = (state: StateType): BaseParamsType | undefined 
 };
 
 export const getElementIdList = createSelector([getElements], (elements) => {
+  console.log('getElementIdList', elements);
+
   return Object.keys(elements).map((key) => parseInt(key, 10)).sort();
 });
 

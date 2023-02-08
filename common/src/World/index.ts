@@ -66,7 +66,9 @@ class World extends EventEmitter implements IWorld {
   set elementParamList(list: BaseParamsType[]) {
     const elementMap = new Map<number, IElement>();
     list.forEach((params) => {
-      const element = elementFactory(params);
+      const element = elementFactory(params, 'left');
+      element.addEventListener(UPDATE_ELEMENT, this.onUpdateElement);
+      element.addEventListener(COLLAPSE_ELEMENT, this.onCollapseElement);
       elementMap.set(params.id, element);
     });
     this.elementMap = elementMap;
@@ -137,11 +139,14 @@ class World extends EventEmitter implements IWorld {
     const { id } = element;
     const keyIterator = elementMap.keys();
     let key = keyIterator.next().value;
+    let i = 0;
     while (key !== undefined) {
       const checkElement = elementMap.get(key);
       if (checkElement?.id !== id) {
         const point = checkElement?.getCollision(element);
-        if (point) return { element: checkElement as IElement, point };
+        if (point) {
+          return { element: checkElement as IElement, point };
+        }
       }
       key = keyIterator.next().value;
     }

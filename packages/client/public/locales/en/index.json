@@ -20,7 +20,7 @@
     "errNotSingle": "Please select only one element."
   },
   "_materials": {
-    "PERSON_MATERIAL": "person",
+    "PERSON_MATERIAL": "character",
     "METAL_MATERIAL": "metal",
     "STONE_MATERIAL": "stone",
     "WATER_MATERIAL": "water",
@@ -49,6 +49,12 @@
       "enterLogin": "Enter your login: ",
       "enterPassword": "Enter your password: ",
       "errIncorrect": "Incorrect login or password. Please try again."
+    },
+    "world": {
+      "generateWorld": "generate world",
+      "amount": "Enter the amount of elements: ",
+      "withoutCharacters": "Do not add characters to the new world?",
+      "generating": "Generating world..."
     }
   },
   "NumberStep": {

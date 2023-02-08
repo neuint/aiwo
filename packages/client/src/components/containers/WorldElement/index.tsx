@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext, useCallback, useRef } from 'react';
+import React, { FC, useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as THREE from 'three';
 
@@ -7,8 +7,7 @@ import IElement from '@common/World/elements/IElement';
 import { checkSelected, getElementById, getCollisionPoints, getControlId } from '@ducks/world/selectors';
 import { worldToggleSelection, worldAddHover, worldRemoveHover } from '@ducks/world';
 import StateType from '@ducks/StateType';
-import WorldHover from '@context/WorldHover';
-import WorldClick from '@context/WorldClick';
+import useMouseInfo from '@root/hooks/useMouseInfo';
 import WorldElementBorderBox from '../WorldElementBorderBox';
 import WorldElementPolyline from '../WorldElementPolyline';
 import WorldElementSelected from '../WorldElementSelected';
@@ -23,20 +22,19 @@ type PropsType = {
 
 const WorldElement: FC<PropsType> = ({ id, scene }: PropsType) => {
   const [index, setIndex] = useState(0);
+  const [uuid, setUuid] = useState<string>('');
   const dispatch = useDispatch();
   const params = useSelector((state: StateType) => getElementById(state, id));
   const [element, setElement] = useState<IElement | undefined>();
-  const hoverList = useContext(WorldHover);
-  const clickList = useContext(WorldClick);
   const selected = useSelector((state: StateType) => checkSelected(state, id));
   const controlId = useSelector(getControlId);
   const collisionPoints = useSelector(getCollisionPoints);
-  const uuid = useRef<string>('');
   const isControlledElement = controlId === id;
-  const isHovered = hoverList.includes(uuid.current);
+
+  const [isHovered, isClicked] = useMouseInfo(uuid);
 
   const renderHandler = useCallback((renderUuid: string) => {
-    uuid.current = renderUuid;
+    setUuid(renderUuid);
   }, []);
 
   useEffect(() => {
@@ -68,10 +66,12 @@ const WorldElement: FC<PropsType> = ({ id, scene }: PropsType) => {
   }, [params, setElement, element]);
 
   useEffect(() => {
-    if (clickList.includes(uuid.current) && !isControlledElement) {
+    if (isClicked && !isControlledElement) {
       dispatch(worldToggleSelection(id));
     }
-  }, [dispatch, clickList, id, isControlledElement]);
+  }, [dispatch, isClicked, id, isControlledElement]);
+
+  // console.log('WorldElement', id);
 
   return element ? (
     <>
