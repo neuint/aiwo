@@ -52,7 +52,9 @@ export const getLinesIntersect = (first: LineType, second: LineType): PointType 
   const { start: { x: x21, y: y21 }, end: { x: x22, y: y22 } } = second;
   const firstStraight = getStraight(first);
   const secondStraight = getStraight(second);
-  const { x, y } = getStraightsIntersection(firstStraight, secondStraight);
+  const { x, y } = secondStraight.b === Infinity || secondStraight.b === -Infinity
+    ? getStraightsIntersection(secondStraight, firstStraight)
+    : getStraightsIntersection(firstStraight, secondStraight);
   return checkBetween(x, x11, x12)
     && checkBetween(x, x21, x22)
     && checkBetween(y, y11, y12)
@@ -79,9 +81,9 @@ export const checkLinesIntersect = (first: LineType, second: LineType): boolean 
 export const getPolylinesIntersect = (first: PointType[], second: PointType[]): PointType | undefined => {
   const firstLines = getPolylineLines(first);
   const secondLines = getPolylineLines(second);
-  for (let i = 0, ln = firstLines.length; i < ln; i += 1) {
+  for (let i = 0, firstLenght = firstLines.length; i < firstLenght; i += 1) {
     const firstLine = firstLines[i];
-    for (let j = 0, ln = firstLines.length; j < ln; j += 1) {
+    for (let j = 0, secondLenght = secondLines.length; j < secondLenght; j += 1) {
       const secondLine = secondLines[j];
       const intersect = getLinesIntersect(firstLine, secondLine);
       if (intersect) return intersect;
