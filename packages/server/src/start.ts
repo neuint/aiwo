@@ -4,7 +4,7 @@ import Server from './Server';
 import * as EVENTS from './Server/constants/events';
 import appConfig from './utils/appConfig';
 import World from '../../../common/src/World';
-import { elementFactory } from '../../../common/src/World/elements';
+import { elementFactory, setNextId } from '../../../common/src/World/elements';
 import {
   ADD_ELEMENT, BACK, COLLISION, FORWARD, INIT, REMOVE_ELEMENT, ROTATE_LEFT, ROTATE_RIGHT, UPDATE_ELEMENT, VIEW_ANGLE,
   COMBINE, BREAK, BITE_OFF, PUSH, PULL, MESSAGE, LEFT, RIGHT,
@@ -101,6 +101,8 @@ server.router.post('/world', (ctx, next) => {
 
   if (elementParamList && elementParamList.length) {
     world.elementParamList = elementParamList;
+    const maxId = world.elements.reduce((acc, element) => (element.params.id > acc ? element.params.id : acc), 0);
+    setNextId(maxId + 1);
     server.broadcast(JSON.stringify({ type: INIT, elementParamList }));
   }
   ctx.body = JSON.stringify({ status: 'ok' });

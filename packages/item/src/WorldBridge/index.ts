@@ -1,6 +1,7 @@
 import {
   client as WebSocket, connection as Connection, Message,
 } from 'websocket';
+import axios from 'axios';
 
 import {
   ADD_ELEMENT, BACK, FORWARD, INIT, MESSAGE, REMOVE_ELEMENT, ROTATE_LEFT, ROTATE_RIGHT,
@@ -49,6 +50,18 @@ class WorldBridge extends EventEmitter implements IWorldBridge {
       this.initResolve = resolve;
       this.initReject = reject;
     });
+  };
+
+  initElements = async (params: BaseParamsType[]): Promise<void> => {
+    const { host, port } = this;
+    const config = {
+      method: 'post',
+      url: `http://${host}:${port}/world`,
+      headers: { 'Content-Type': 'application/json' },
+      data: { elementParamList: params },
+    };
+    const resp = await axios(config);
+    if (resp?.data?.status !== 'ok') throw new Error('broken data');
   };
 
   private closeConnection(): void {

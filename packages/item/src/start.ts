@@ -19,7 +19,7 @@ import {
 
 const port = process.env.PORT ? Number(process.env.PORT) : 8080;
 const host = process.env.HOST || 'localhost';
-const id = process.env.ID ? Number(process.env.ID) : 3;
+const id = process.env.ID ? Number(process.env.ID) : undefined;
 const workerPath = process.env.WORKER || path.join(__dirname, './rustWorker/index.js');
 const itemPath = process.env.ITEM || '../../pkg/item';
 
