@@ -49,3 +49,5 @@ Cargo.lock
 bin/
 pkg/
 wasm-pack.log
+
+packages/item/src/imp

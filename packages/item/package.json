@@ -6,7 +6,7 @@
   "author": "Pavlo <p.gusar@yahoo.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/start.ts",
+    "start": "ID=6 ts-node src/start.ts",
     "wasm": "wasm-pack build --target nodejs"
   },
   "devDependencies": {
